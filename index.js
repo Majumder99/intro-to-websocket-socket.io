@@ -20,6 +20,12 @@ io.on("connection", (socket) => {
   //Server is listening using this method
   socket.on("chat", (data) => {
     // console.log(data);
+    //it will send all the client the data value. that's why io.sockets
     io.sockets.emit("chat", data);
+  });
+
+  //broadcast means that it will send data to the other client not it's own
+  socket.on("typing", (data) => {
+    socket.broadcast.emit("typing", data);
   });
 });
