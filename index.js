@@ -15,5 +15,11 @@ app.use(express.static("public"));
 const io = socket(server);
 
 io.on("connection", (socket) => {
-  console.log("made socket connection");
+  console.log(`made socket connection ${socket.message}`);
+  //We have used socket.on because this will get the data from the client
+  //Server is listening using this method
+  socket.on("chat", (data) => {
+    // console.log(data);
+    io.sockets.emit("chat", data);
+  });
 });
